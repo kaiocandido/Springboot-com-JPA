@@ -14,8 +14,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "tb_categories")
-public class Category  implements Serializable {
+@Table(name = "tb-products")
+public class Product implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -23,16 +23,19 @@ public class Category  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private final Set<Product> products = new HashSet<>();
+    private String description;
+    private Double price;
+    private String img;
+    private final Set<Category> categories = new HashSet<>();
 
+    public Product(){}
 
-    public Category(){
-
-    }
-
-    public Category(String name, Integer id) {
-        this.name = name;
+    public Product(Integer id, String name, String description, Double price, String img) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.img = img;
     }
 
     public Integer getId() {
@@ -51,20 +54,43 @@ public class Category  implements Serializable {
         this.name = name;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Category category = (Category) o;
-        return Objects.equals(id, category.id);
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
     }
-
 }
