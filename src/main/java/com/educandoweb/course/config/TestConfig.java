@@ -3,6 +3,7 @@ package com.educandoweb.course.config;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.OrdemItem;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.entities.Product;
@@ -79,5 +80,11 @@ public class TestConfig implements CommandLineRunner {
         OrdemItem oi4 = new OrdemItem(o3, p5, 2, p5.getPrice());
 
         ordemItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
+
+        Payment payment1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+        o1.setPayment(payment1);
+
+        orderRepository.save(o1);
     }
 }
