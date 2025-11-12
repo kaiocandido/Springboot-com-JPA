@@ -28,6 +28,8 @@ public class UserService {
         return userRepository.save(obj);
     }
 
-
+    public void deleteUser(Integer id){
+        userRepository.deleteById(id);
+    }
 
 }
