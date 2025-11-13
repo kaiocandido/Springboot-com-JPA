@@ -1,5 +1,7 @@
 package com.educandoweb.course.services.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
@@ -7,7 +9,7 @@ import java.time.Instant;
 public class StandardError implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MMM/dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant timestamp;
     private Integer status;
     private String error;
