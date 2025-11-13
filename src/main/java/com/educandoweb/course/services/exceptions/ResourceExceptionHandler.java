@@ -10,9 +10,17 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ResourceExceptionHandler{
-    @ExceptionHandler(ResourceNotFoundException.class)
+   @ExceptionHandler(ResourceNotFoundException.class)
    public ResponseEntity<StandardError>  resourceNotFound (ResourceNotFoundException e, HttpServletRequest request){
         String error = "Resource not Found";
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError standardError = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(standardError);
+   }
+
+   @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandardError>  dataBase (DataBaseException e, HttpServletRequest request){
+        String error = "Database error";
         HttpStatus status = HttpStatus.NOT_FOUND;
         StandardError standardError = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(standardError);
